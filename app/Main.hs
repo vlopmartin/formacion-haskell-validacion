@@ -14,6 +14,8 @@ main = scotty 3000 $ do
     (e :: String) <- param "email"
     (p :: String) <- param "password"
     (a :: Int) <- param "edad"
-    text "Por implementar"
+    case (validarUsuario e p a) of
+      Valido u -> json u
+      Invalido -> return ()
 
 instance A.ToJSON Usuario
